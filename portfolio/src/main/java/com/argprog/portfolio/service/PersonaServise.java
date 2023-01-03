@@ -6,6 +6,7 @@ import com.argprog.portfolio.repository.PersonaRepository;
 import jakarta.transaction.Transactional; 
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,16 @@ public class PersonaServise implements IPersonaService {
     @Override
     public Persona buscarPersona(Long id) {
         return persoRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return persoRepo.existsById(id);
+    }
+
+    @Override
+    public Optional<Persona> getOne(Long id) {
+        return persoRepo.findById(id);
     }
     
     

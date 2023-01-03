@@ -1,10 +1,13 @@
 package com.argprog.portfolio.controller;
 
 import com.argprog.portfolio.Interface.IHardSkillFrontEndService;
+import com.argprog.portfolio.Security.Controller.Mensaje;
 import com.argprog.portfolio.entity.HardSkillFrontEnd;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,21 +42,31 @@ public class HardSkillFrontEndController {
        iHardSkillFrontEndService.borrarHardSkillFrontEnd(id);
     }
     
-    @PutMapping("editar/{id}")
-    public HardSkillFrontEnd editarHardSkillFrontEnd(@PathVariable Long id,
-                                @RequestParam("icono") String nuevoicono,
-                                @RequestParam("nombreFrontEnd") String nuevonombreFrontEnd,
-                                @RequestParam("nivelFrontEnd") String nuevonivelFrontEnd,
-                                @RequestParam("porcentaje") int nuevoporcentaje){
-        HardSkillFrontEnd hsfe =  iHardSkillFrontEndService.buscarHardSkillFrontEnd(id);
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody HardSkillFrontEnd hsfe){
+        //Validamos si existe el ID
+        if(!iHardSkillFrontEndService.existsById(id))
+            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
+        //Compara nombre de experiencias
+       
+        HardSkillFrontEnd hsfEnd = iHardSkillFrontEndService.getOne(id).get();
+        hsfEnd.setIcono(hsfe.getIcono());
+        hsfEnd.setNombreFrontEnd(hsfe.getNombreFrontEnd());
+        hsfEnd.setNivelFrontEnd(hsfe.getNivelFrontEnd());
+        hsfEnd.setPorcentaje(hsfe.getPorcentaje());
         
-        hsfe.setIcono(nuevoicono);
-        hsfe.setNombreFrontEnd(nuevonombreFrontEnd);
-        hsfe.setNivelFrontEnd(nuevonivelFrontEnd);
-        hsfe.setPorcentaje(nuevoporcentaje);
-        
-
-        iHardSkillFrontEndService.crearHardSkillFrontEnd(hsfe);
-        return hsfe;
+        iHardSkillFrontEndService.crearHardSkillFrontEnd(hsfEnd);
+        return new ResponseEntity(new Mensaje("Hard Skill Front End actualizada"), HttpStatus.OK);
+             
     }
+    
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<HardSkillFrontEnd> getById(@PathVariable("id") Long id){
+        if(!iHardSkillFrontEndService.existsById(id))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        HardSkillFrontEnd hsfe = iHardSkillFrontEndService.getOne(id).get();
+        return new ResponseEntity(hsfe, HttpStatus.OK);
+    }
+    
 }

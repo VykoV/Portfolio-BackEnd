@@ -6,6 +6,7 @@ import com.argprog.portfolio.repository.ProyectosRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,17 @@ public class ProyectosService implements IProyectosService{
     @Override
     public Proyectos buscarProyectos(Long id) {
         return proyectosRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return proyectosRepository.existsById(id);
+
+    }
+
+    @Override
+    public Optional<Proyectos> getOne(Long id) {
+        return proyectosRepository.findById(id);
     }
     
 }

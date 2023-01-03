@@ -5,6 +5,7 @@ import com.argprog.portfolio.entity.AcercaDeMi;
 import com.argprog.portfolio.repository.AcercaDeMiRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,16 @@ public class AcercaDeMiService implements IAcercaDeMiService {
 
     @Override
     public AcercaDeMi buscarAcercaDeMi(Long id) {
-         return acercaDeMiRepository.findById(id).orElse(null);
+        return acercaDeMiRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return acercaDeMiRepository.existsById(id);
+}
+
+    @Override
+    public Optional<AcercaDeMi> getOne(Long id) {
+        return acercaDeMiRepository.findById(id);
+}
 }

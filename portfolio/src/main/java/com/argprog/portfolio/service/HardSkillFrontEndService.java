@@ -5,6 +5,7 @@ import com.argprog.portfolio.entity.HardSkillFrontEnd;
 import com.argprog.portfolio.repository.HardSkillFrontEndRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,18 @@ public class HardSkillFrontEndService implements IHardSkillFrontEndService{
     @Override
     public HardSkillFrontEnd buscarHardSkillFrontEnd(Long id) {
         return hardSkillFrontEndRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return hardSkillFrontEndRepository.existsById(id);
+
+    }
+
+    @Override
+    public Optional<HardSkillFrontEnd> getOne(Long id) {
+        return hardSkillFrontEndRepository.findById(id);
+
     }
     
 }

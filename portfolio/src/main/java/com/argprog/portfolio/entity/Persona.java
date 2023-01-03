@@ -18,19 +18,19 @@ public class Persona {
     private Long id;
     
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String imgBanner;
     
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String imgPerfil;
     
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String nombrePerfil;
     
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String titulo;
     
     public Persona(){    

@@ -2,6 +2,7 @@ package com.argprog.portfolio.Interface;
 
 import com.argprog.portfolio.entity.HardSkillFrontEnd;
 import java.util.List;
+import java.util.Optional;
 
 
 public interface IHardSkillFrontEndService {
@@ -9,4 +10,6 @@ public interface IHardSkillFrontEndService {
     public void crearHardSkillFrontEnd (HardSkillFrontEnd hsfe);
     public void borrarHardSkillFrontEnd (Long id);
     public HardSkillFrontEnd buscarHardSkillFrontEnd(Long id);
+    public boolean existsById(Long id);
+    public Optional<HardSkillFrontEnd> getOne(Long id);
 }

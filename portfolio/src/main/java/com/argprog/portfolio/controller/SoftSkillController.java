@@ -1,10 +1,13 @@
 package com.argprog.portfolio.controller;
 
 import com.argprog.portfolio.Interface.ISoftSkillService;
+import com.argprog.portfolio.Security.Controller.Mensaje;
 import com.argprog.portfolio.entity.SoftSkill;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,21 +42,32 @@ public class SoftSkillController {
         iSoftSkillService.borrarSoftSkill(id);
     }
     
-    @PutMapping("editar/{id}")
-    public SoftSkill editarSoftSkill(@PathVariable Long id,
-                                @RequestParam("icono") String nuevoicono,
-                                @RequestParam("nombreSkill") String nuevonombreSkill,
-                                @RequestParam("nivelSkill") String nuevonivelSkill,
-                                @RequestParam("porcentaje") int nuevoporcentaje){
-        SoftSkill ss =  iSoftSkillService.buscarSoftSkill(id);
+    
+     @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody SoftSkill ss){
+        //Validamos si existe el ID
+        if(!iSoftSkillService.existsById(id))
+            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
+        //Compara nombre de experiencias
+       
+        SoftSkill sskill = iSoftSkillService.getOne(id).get();
+        sskill.setIcono(ss.getIcono());
+        sskill.setNombreSkill(ss.getNombreSkill());
+        sskill.setNivelSkill(ss.getNivelSkill());
+        sskill.setPorcentaje(ss.getPorcentaje());
         
-        ss.setIcono(nuevoicono);
-        ss.setNombreSkill(nuevonombreSkill);
-        ss.setNivelSkill(nuevonivelSkill);
-        ss.setPorcentaje(nuevoporcentaje);
-        
-
-        iSoftSkillService.crearSoftSkill(ss);
-        return ss;
+        iSoftSkillService.crearSoftSkill(sskill);
+        return new ResponseEntity(new Mensaje("Soft Skill actualizada"), HttpStatus.OK);
+             
     }
+    
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<SoftSkill> getById(@PathVariable("id") Long id){
+        if(!iSoftSkillService.existsById(id))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        SoftSkill ss = iSoftSkillService.getOne(id).get();
+        return new ResponseEntity(ss, HttpStatus.OK);
+    }
+    
+    
 }

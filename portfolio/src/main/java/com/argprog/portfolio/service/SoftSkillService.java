@@ -6,6 +6,7 @@ import com.argprog.portfolio.repository.SoftSkillRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,15 @@ public class SoftSkillService implements ISoftSkillService{
     @Override
     public SoftSkill buscarSoftSkill(Long id) {
         return softSkillRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return softSkillRepository.existsById(id);
+    }
+
+    @Override
+    public Optional<SoftSkill> getOne(Long id) {
+        return softSkillRepository.findById(id);
     }
 }

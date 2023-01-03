@@ -1,10 +1,13 @@
 package com.argprog.portfolio.controller;
 
 import com.argprog.portfolio.Interface.IHardSkillBackEndService;
+import com.argprog.portfolio.Security.Controller.Mensaje;
 import com.argprog.portfolio.entity.HardSkillBackEnd;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("hardskillbackend")
 @CrossOrigin(origins="http://localhost:4200")
 public class HardSkillBackEndController {
-    
     @Autowired
     private IHardSkillBackEndService iHardSkillBackEndService;
     
@@ -41,21 +42,30 @@ public class HardSkillBackEndController {
         iHardSkillBackEndService.borrarHardSkillBackEnd(id);
     }
     
-    @PutMapping("editar/{id}")
-    public HardSkillBackEnd editarHardSkillBackEnd(@PathVariable Long id,
-                                @RequestParam("icono") String nuevoicono,
-                                @RequestParam("nombreBackEnd") String nuevonombreBackEnd,
-                                @RequestParam("nivelBackEnd") String nuevonivelBackEnd,
-                                @RequestParam("porcentaje") int nuevoporcentaje){
-        HardSkillBackEnd hsbe =  iHardSkillBackEndService.buscarHardSkillBackEnd(id);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody HardSkillBackEnd hsbe){
+        //Validamos si existe el ID
+        if(!iHardSkillBackEndService.existsById(id))
+            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
+        //Compara nombre de experiencias
+       
+        HardSkillBackEnd hsbEnd = iHardSkillBackEndService.getOne(id).get();
+        hsbEnd.setIcono(hsbe.getIcono());
+        hsbEnd.setNombreBackEnd(hsbe.getNombreBackEnd());
+        hsbEnd.setNivelBackEnd(hsbe.getNivelBackEnd());
+        hsbEnd.setPorcentaje(hsbe.getPorcentaje());
         
-        hsbe.setIcono(nuevoicono);
-        hsbe.setNombreBackEnd(nuevonombreBackEnd);
-        hsbe.setNivelBackEnd(nuevonivelBackEnd);
-        hsbe.setPorcentaje(nuevoporcentaje);
-        
-
-        iHardSkillBackEndService.crearHardSkillBackEnd(hsbe);
-        return hsbe;
+        iHardSkillBackEndService.crearHardSkillBackEnd(hsbEnd);
+        return new ResponseEntity(new Mensaje("Hard Skill Back End actualizada"), HttpStatus.OK);
+             
+    }
+    
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<HardSkillBackEnd> getById(@PathVariable("id") Long id){
+        if(!iHardSkillBackEndService.existsById(id))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        HardSkillBackEnd hsbe = iHardSkillBackEndService.getOne(id).get();
+        return new ResponseEntity(hsbe, HttpStatus.OK);
     }
 }
+

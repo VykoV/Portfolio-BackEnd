@@ -16,7 +16,7 @@ import lombok.Setter;
 public class HardSkillFrontEnd {
   
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     
     @NotNull

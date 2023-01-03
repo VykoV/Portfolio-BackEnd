@@ -6,6 +6,7 @@ import com.argprog.portfolio.repository.EducacionRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,16 @@ public class EducacionService implements IEducacionService {
     @Override
     public Educacion buscarEducacion(Long id) {
         return educacionRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return educacionRepository.existsById(id);
+    }
+
+    @Override
+    public Optional<Educacion> getOne(Long id) {
+        return educacionRepository.findById(id);
     }
     
 }

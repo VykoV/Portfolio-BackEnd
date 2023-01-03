@@ -16,22 +16,22 @@ public class ExperienciaLaboral {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+
     private String imgEmpresa;
 
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String nombreEmpresa;
 
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String puesto;
     
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String periodoPuestoInicio;
 
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String periodoPuestoFin;
 
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String descripcion;
     
     public ExperienciaLaboral(){  
@@ -46,4 +46,6 @@ public class ExperienciaLaboral {
         this.periodoPuestoFin=periodoPuestoFin;
         this.descripcion=descripcion;
     }
+    
+    
 }
