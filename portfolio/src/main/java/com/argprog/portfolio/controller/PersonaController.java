@@ -28,12 +28,13 @@ public class PersonaController {
     @Autowired
     private IPersonaService persoServ;
     
-    
+    /*
     @PostMapping("/new")
-    /*@PreAuthorize("hasRole('ADMIN')")*/
+    @PreAuthorize("hasRole('ADMIN')")
     public void agregarPersona (@RequestBody Persona pers){
         persoServ.crearPersona(pers);
     }
+    */
     
     @GetMapping("/ver")
     @ResponseBody
@@ -42,29 +43,24 @@ public class PersonaController {
     }
     
     
-    @DeleteMapping ("/delete/{id}")
+    /*@DeleteMapping ("/delete/{id}")
     public void borrarPersona(@PathVariable Long id){
         persoServ.borrarPersona(id);
-    }
+    }*/
     
     
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Persona perso){
-        //Validamos si existe el ID
         if(!persoServ.existsById(id))
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        //Compara nombre de experiencias
-       
         Persona Per = persoServ.getOne(id).get();
         Per.setNombrePerfil(perso.getNombrePerfil());
         Per.setImgBanner(perso.getImgBanner());
         Per.setImgPerfil(perso.getImgPerfil());
         Per.setTitulo(perso.getTitulo());
-        
-        
+
         persoServ.crearPersona(Per);
-        return new ResponseEntity(new Mensaje("Educacion actualizada"), HttpStatus.OK);
-             
+        return new ResponseEntity(new Mensaje("Persona actualizada"), HttpStatus.OK);
     }
     
     @GetMapping("/detail/{id}")

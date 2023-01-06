@@ -16,8 +16,6 @@ public class JwtDto {
         this.authorities = authorities;
     }
 
-    
-    
     public String getToken() {
         return token;
     }

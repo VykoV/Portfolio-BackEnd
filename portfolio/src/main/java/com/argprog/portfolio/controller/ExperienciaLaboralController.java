@@ -67,10 +67,10 @@ public class ExperienciaLaboralController {
     
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody ExperienciaLaboral el){
-        //Validamos si existe el ID
+
         if(!iExperienciaLaboralService.existsById(id))
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        //Compara nombre de experiencias
+
        
         ExperienciaLaboral experiencia = iExperienciaLaboralService.getOne(id).get();
         experiencia.setNombreEmpresa(el.getNombreEmpresa());
@@ -82,7 +82,7 @@ public class ExperienciaLaboralController {
         
         
         iExperienciaLaboralService.crearExperienciaLaboral(experiencia);
-        return new ResponseEntity(new Mensaje("Experiencia actualizada"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("Experiencia laboral actualizada"), HttpStatus.OK);
              
     }
     

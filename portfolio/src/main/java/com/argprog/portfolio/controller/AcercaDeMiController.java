@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,19 +44,16 @@ public class AcercaDeMiController {
     
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody AcercaDeMi adm){
-        //Validamos si existe el ID
+ 
         if(!iAcercaDeMiService.existsById(id))
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        //Compara nombre de experiencias
        
         AcercaDeMi aDMi = iAcercaDeMiService.getOne(id).get();
         aDMi.setInformacionAcercaDeMi(adm.getInformacionAcercaDeMi());
         aDMi.setDestacable(adm.getDestacable());
-        
-        
+    
         iAcercaDeMiService.crearAcercaDeMi(aDMi);
-        return new ResponseEntity(new Mensaje("Educacion actualizada"), HttpStatus.OK);
-             
+        return new ResponseEntity(new Mensaje("Acerca de mi actualizada"), HttpStatus.OK);
     }
     
     @GetMapping("/detail/{id}")

@@ -19,15 +19,15 @@ public class HardSkillBackEnd {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     
-    @NotNull
+    
     private String icono;
    
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String nombreBackEnd;
    
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String nivelBackEnd;
     
     @NotNull
@@ -35,7 +35,6 @@ public class HardSkillBackEnd {
     @Max(100)
     private int porcentaje;
     
-
     public HardSkillBackEnd(){
     }
     

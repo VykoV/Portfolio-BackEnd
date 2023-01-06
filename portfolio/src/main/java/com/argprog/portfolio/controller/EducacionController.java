@@ -48,11 +48,8 @@ public class EducacionController {
     
      @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Educacion educa){
-        //Validamos si existe el ID
         if(!iEducacionService.existsById(id))
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        //Compara nombre de experiencias
-       
         Educacion ed = iEducacionService.getOne(id).get();
         ed.setLogo(educa.getLogo());
         ed.setNombreCurso(educa.getNombreCurso());

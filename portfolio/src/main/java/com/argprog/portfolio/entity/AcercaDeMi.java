@@ -17,11 +17,11 @@ public class AcercaDeMi {
     private Long id;
    
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String destacable;
    
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String informacionAcercaDeMi;
     
     public AcercaDeMi(){

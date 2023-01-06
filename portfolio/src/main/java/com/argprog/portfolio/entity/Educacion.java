@@ -17,26 +17,25 @@ public class Educacion {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
     private String logo;
     
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String nombreCurso;
     
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String carreraCurso;
     
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String titulo;
     
     @NotNull
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String periodoEstudiosInicio;
     
-    @Size(min=1,max=500,message="Ingrese correctamente los datos")
+    @Size(min=1,max=500)
     private String periodoEstudiosFin;
     
     public Educacion(){  

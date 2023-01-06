@@ -44,11 +44,9 @@ public class HardSkillBackEndController {
     
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody HardSkillBackEnd hsbe){
-        //Validamos si existe el ID
         if(!iHardSkillBackEndService.existsById(id))
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        //Compara nombre de experiencias
-       
+
         HardSkillBackEnd hsbEnd = iHardSkillBackEndService.getOne(id).get();
         hsbEnd.setIcono(hsbe.getIcono());
         hsbEnd.setNombreBackEnd(hsbe.getNombreBackEnd());

@@ -16,7 +16,6 @@ public class ExperienciaLaboral {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-
     private String imgEmpresa;
 
     @Size(min=1,max=500)

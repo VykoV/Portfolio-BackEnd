@@ -45,11 +45,8 @@ public class HardSkillFrontEndController {
     
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody HardSkillFrontEnd hsfe){
-        //Validamos si existe el ID
         if(!iHardSkillFrontEndService.existsById(id))
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        //Compara nombre de experiencias
-       
         HardSkillFrontEnd hsfEnd = iHardSkillFrontEndService.getOne(id).get();
         hsfEnd.setIcono(hsfe.getIcono());
         hsfEnd.setNombreFrontEnd(hsfe.getNombreFrontEnd());
@@ -58,7 +55,6 @@ public class HardSkillFrontEndController {
         
         iHardSkillFrontEndService.crearHardSkillFrontEnd(hsfEnd);
         return new ResponseEntity(new Mensaje("Hard Skill Front End actualizada"), HttpStatus.OK);
-             
     }
     
     @GetMapping("/detail/{id}")
