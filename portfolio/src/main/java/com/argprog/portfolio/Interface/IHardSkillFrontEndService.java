@@ -10,6 +10,6 @@ public interface IHardSkillFrontEndService {
     public void crearHardSkillFrontEnd (HardSkillFrontEnd hsfe);
     public void borrarHardSkillFrontEnd (Long id);
     public HardSkillFrontEnd buscarHardSkillFrontEnd(Long id);
-    public boolean existsById(Long id);
-    public Optional<HardSkillFrontEnd> getOne(Long id);
+    public boolean existencia(Long id);
+    public Optional<HardSkillFrontEnd> uno(Long id);
 }

@@ -1,14 +1,9 @@
 package com.argprog.portfolio.controller;
 
 import com.argprog.portfolio.Interface.IAcercaDeMiService;
-import com.argprog.portfolio.Security.Controller.Mensaje;
 import com.argprog.portfolio.entity.AcercaDeMi;
-
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,37 +27,30 @@ public class AcercaDeMiController {
         return iAcercaDeMiService.verAcercaDeMi();
     }
     
-    @PostMapping("/new")
+    @PostMapping("/nuevo")
     public void crearAcercaDeMi(@RequestBody AcercaDeMi adm){
         iAcercaDeMiService.crearAcercaDeMi(adm);
     }
     
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void borrarAcercaDeMi(@PathVariable Long id){
         iAcercaDeMiService.borrarAcercaDeMi(id);
     }
     
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody AcercaDeMi adm){
- 
-        if(!iAcercaDeMiService.existsById(id))
-            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-       
-        AcercaDeMi aDMi = iAcercaDeMiService.getOne(id).get();
+    @GetMapping("/adm/{id}")
+    public AcercaDeMi obtener(@PathVariable("id") Long id){
+        AcercaDeMi experiencia = iAcercaDeMiService.uno(id).get();
+        return experiencia;
+    }
+    
+
+    @PutMapping("/actualizar/{id}")
+    public void actualizar(@PathVariable("id") Long id, @RequestBody AcercaDeMi adm){
+        AcercaDeMi aDMi = iAcercaDeMiService.uno(id).get();
         aDMi.setInformacionAcercaDeMi(adm.getInformacionAcercaDeMi());
         aDMi.setDestacable(adm.getDestacable());
-    
         iAcercaDeMiService.crearAcercaDeMi(aDMi);
-        return new ResponseEntity(new Mensaje("Acerca de mi actualizada"), HttpStatus.OK);
+        
     }
-    
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<AcercaDeMi> getById(@PathVariable("id") Long id){
-        if(!iAcercaDeMiService.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        AcercaDeMi experiencia = iAcercaDeMiService.getOne(id).get();
-        return new ResponseEntity(experiencia, HttpStatus.OK);
-    }
-    
     
 }

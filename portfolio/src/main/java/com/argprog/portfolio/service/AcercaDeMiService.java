@@ -36,12 +36,12 @@ public class AcercaDeMiService implements IAcercaDeMiService {
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existencia(Long id) {
         return acercaDeMiRepository.existsById(id);
 }
 
     @Override
-    public Optional<AcercaDeMi> getOne(Long id) {
+    public Optional<AcercaDeMi> uno(Long id) {
         return acercaDeMiRepository.findById(id);
 }
 }

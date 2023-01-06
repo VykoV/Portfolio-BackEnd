@@ -38,12 +38,12 @@ public class PersonaServise implements IPersonaService {
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existencia(Long id) {
         return persoRepo.existsById(id);
     }
 
     @Override
-    public Optional<Persona> getOne(Long id) {
+    public Optional<Persona> uno(Long id) {
         return persoRepo.findById(id);
     }
     

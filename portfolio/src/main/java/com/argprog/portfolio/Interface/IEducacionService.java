@@ -9,6 +9,6 @@ public interface IEducacionService {
     public void crearEducacion (Educacion educa);
     public void borrarEducacion (Long id);
     public Educacion buscarEducacion (Long id);
-    public boolean existsById(Long id);
-    public Optional<Educacion> getOne(Long id);
+    public boolean existencia(Long id);
+    public Optional<Educacion> uno(Long id);
 }

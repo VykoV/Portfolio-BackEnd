@@ -9,6 +9,6 @@ public interface IExperienciaLaboralService {
     public void crearExperienciaLaboral (ExperienciaLaboral el);
     public void borrarExperienciaLaboral (Long id);
     public ExperienciaLaboral buscarExperienciaLaboral (Long id);
-    public boolean existsById(Long id);
-    public Optional<ExperienciaLaboral> getOne(Long id);
+    public boolean existencia(Long id);
+    public Optional<ExperienciaLaboral> uno(Long id);
 }

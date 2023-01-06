@@ -26,7 +26,7 @@ public class ProyectosController {
     @Autowired
     private IProyectosService iProyectosService;
     
-    @PostMapping("/new")
+    @PostMapping("/nuevo")
     public void agregarProyectos (@RequestBody Proyectos proy){
         iProyectosService.crearProyectos(proy);
     }
@@ -37,35 +37,28 @@ public class ProyectosController {
        return iProyectosService.verProyectos();
     }
     
-    @DeleteMapping ("/delete/{id}")
+    @DeleteMapping ("/eliminar/{id}")
     public void borrarProyectos(@PathVariable Long id){
         iProyectosService.borrarProyectos(id);
     }
    
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Proyectos proyec){
-        //Validamos si existe el ID
-        if(!iProyectosService.existsById(id))
-            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        //Compara nombre de experiencias
-       
-        Proyectos proy = iProyectosService.getOne(id).get();
+    @PutMapping("/actualizar/{id}")
+    public void actualizar(@PathVariable("id") Long id, @RequestBody Proyectos proyec){
+
+        Proyectos proy = iProyectosService.uno(id).get();
         proy.setNombreProyecto(proyec.getNombreProyecto());
         proy.setDescripcionProyecto(proyec.getDescripcionProyecto());
         proy.setUrlRepositorio(proyec.getUrlRepositorio());
         proy.setUrlImgProyecto(proyec.getUrlImgProyecto());
         
         iProyectosService.crearProyectos(proy);
-        return new ResponseEntity(new Mensaje("Hard Skill Back End actualizada"), HttpStatus.OK);
-             
     }
     
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<Proyectos> getById(@PathVariable("id") Long id){
-        if(!iProyectosService.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Proyectos hsbe = iProyectosService.getOne(id).get();
-        return new ResponseEntity(hsbe, HttpStatus.OK);
+    @GetMapping("/proy/{id}")
+    public Proyectos obtener(@PathVariable("id") Long id){
+       
+        Proyectos proy = iProyectosService.uno(id).get();
+        return proy;
     }
     
 }

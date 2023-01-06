@@ -39,13 +39,13 @@ public class HardSkillBackEndService implements IHardSkillBackEndService {
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existencia(Long id) {
         return hardSkillBackEndRepository.existsById(id);
 
     }
 
     @Override
-    public Optional<HardSkillBackEnd> getOne(Long id) {
+    public Optional<HardSkillBackEnd> uno(Long id) {
         return hardSkillBackEndRepository.findById(id);
 
     }

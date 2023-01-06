@@ -26,7 +26,7 @@ public class SoftSkillController {
     @Autowired
     private ISoftSkillService iSoftSkillService;
     
-    @PostMapping("/new")
+    @PostMapping("/nuevo")
     public void agregarSoftSkill (@RequestBody SoftSkill ss){
         iSoftSkillService.crearSoftSkill(ss);
     }
@@ -37,36 +37,29 @@ public class SoftSkillController {
        return iSoftSkillService.verSoftSkill();
     }
     
-    @DeleteMapping ("/delete/{id}")
+    @DeleteMapping ("/eliminar/{id}")
     public void borrarSoftSkill(@PathVariable Long id){
         iSoftSkillService.borrarSoftSkill(id);
     }
     
     
-     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody SoftSkill ss){
-        //Validamos si existe el ID
-        if(!iSoftSkillService.existsById(id))
-            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        //Compara nombre de experiencias
-       
-        SoftSkill sskill = iSoftSkillService.getOne(id).get();
+     @PutMapping("/actualizar/{id}")
+    public void  actualizar(@PathVariable("id") Long id, @RequestBody SoftSkill ss){
+        
+        SoftSkill sskill = iSoftSkillService.uno(id).get();
         sskill.setIcono(ss.getIcono());
         sskill.setNombreSkill(ss.getNombreSkill());
         sskill.setNivelSkill(ss.getNivelSkill());
         sskill.setPorcentaje(ss.getPorcentaje());
         
         iSoftSkillService.crearSoftSkill(sskill);
-        return new ResponseEntity(new Mensaje("Soft Skill actualizada"), HttpStatus.OK);
              
     }
     
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<SoftSkill> getById(@PathVariable("id") Long id){
-        if(!iSoftSkillService.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        SoftSkill ss = iSoftSkillService.getOne(id).get();
-        return new ResponseEntity(ss, HttpStatus.OK);
+    @GetMapping("/ss/{id}")
+    public SoftSkill obtener(@PathVariable("id") Long id){
+        SoftSkill ss = iSoftSkillService.uno(id).get();
+        return ss;
     }
     
     

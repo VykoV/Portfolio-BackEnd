@@ -10,6 +10,6 @@ public interface IHardSkillBackEndService {
     public void crearHardSkillBackEnd (HardSkillBackEnd hsbe);
     public void borrarHardSkillBackEnd (Long id);
     public HardSkillBackEnd buscarHardSkillBackEnd(Long id);
-    public boolean existsById(Long id);
-    public Optional<HardSkillBackEnd> getOne(Long id);
+    public boolean existencia(Long id);
+    public Optional<HardSkillBackEnd> uno(Long id);
 }

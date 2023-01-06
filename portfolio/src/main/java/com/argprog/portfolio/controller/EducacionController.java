@@ -1,13 +1,10 @@
 package com.argprog.portfolio.controller;
 
 import com.argprog.portfolio.Interface.IEducacionService;
-import com.argprog.portfolio.Security.Controller.Mensaje;
 import com.argprog.portfolio.entity.Educacion;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +24,7 @@ public class EducacionController {
     @Autowired 
     private IEducacionService iEducacionService;
     
-    @PostMapping("/new")
+    @PostMapping("/nuevo")
     public void agregarEducacion(@RequestBody Educacion educa){
         iEducacionService.crearEducacion(educa);
     }
@@ -37,39 +34,31 @@ public class EducacionController {
     public List<Educacion>verEducacion(){
         return iEducacionService.verEducacion();
     }
-  
+ 
     
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void borrarEducacion(@PathVariable Long id){
         iEducacionService.borrarEducacion(id);
     }
         
+    @GetMapping("/ed/{id}")
+    public Educacion obtener(@PathVariable("id") Long id){
+        Educacion educ = iEducacionService.uno(id).get();
+        return educ;
+    }
     
-    
-     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Educacion educa){
-        if(!iEducacionService.existsById(id))
-            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        Educacion ed = iEducacionService.getOne(id).get();
+     @PutMapping("/actualizar/{id}")
+    public void actualizar(@PathVariable("id") Long id, @RequestBody Educacion educa){
+        Educacion ed = iEducacionService.uno(id).get();
         ed.setLogo(educa.getLogo());
         ed.setNombreCurso(educa.getNombreCurso());
         ed.setCarreraCurso(educa.getCarreraCurso());
         ed.setTitulo(educa.getTitulo());
         ed.setPeriodoEstudiosInicio(educa.getPeriodoEstudiosInicio());
         ed.setPeriodoEstudiosFin(educa.getPeriodoEstudiosFin());
-        
-        
-        iEducacionService.crearEducacion(ed);
-        return new ResponseEntity(new Mensaje("Educacion actualizada"), HttpStatus.OK);
-             
+        iEducacionService.crearEducacion(ed);    
     }
     
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<Educacion> getById(@PathVariable("id") Long id){
-        if(!iEducacionService.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Educacion experiencia = iEducacionService.getOne(id).get();
-        return new ResponseEntity(experiencia, HttpStatus.OK);
-    }
+
     
 }

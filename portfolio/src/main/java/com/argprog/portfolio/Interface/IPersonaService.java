@@ -9,6 +9,6 @@ public interface IPersonaService {
     public void crearPersona (Persona per);
     public void borrarPersona (Long id);
     public Persona buscarPersona(Long id);
-    public boolean existsById(Long id);
-    public Optional<Persona> getOne(Long id);
+    public boolean existencia(Long id);
+    public Optional<Persona> uno(Long id);
 }

@@ -9,6 +9,6 @@ public interface ISoftSkillService {
     public void crearSoftSkill (SoftSkill ss);
     public void borrarSoftSkill (Long id);
     public SoftSkill buscarSoftSkill(Long id);
-    public boolean existsById(Long id);
-    public Optional<SoftSkill> getOne(Long id);
+    public boolean existencia(Long id);
+    public Optional<SoftSkill> uno(Long id);
 }

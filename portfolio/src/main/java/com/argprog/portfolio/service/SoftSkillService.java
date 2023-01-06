@@ -37,12 +37,12 @@ public class SoftSkillService implements ISoftSkillService{
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existencia(Long id) {
         return softSkillRepository.existsById(id);
     }
 
     @Override
-    public Optional<SoftSkill> getOne(Long id) {
+    public Optional<SoftSkill> uno(Long id) {
         return softSkillRepository.findById(id);
     }
 }

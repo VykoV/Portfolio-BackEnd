@@ -35,12 +35,12 @@ public class ExperienciaLaboralService implements IExperienciaLaboralService {
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existencia(Long id) {
         return experienciaLaboralRepository.existsById(id);
     }
 
     @Override
-    public Optional<ExperienciaLaboral> getOne(Long id) {
+    public Optional<ExperienciaLaboral> uno(Long id) {
         return experienciaLaboralRepository.findById(id);
     }
 

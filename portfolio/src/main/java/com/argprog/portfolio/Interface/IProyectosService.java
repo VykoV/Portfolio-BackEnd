@@ -9,6 +9,6 @@ public interface IProyectosService {
     public void crearProyectos (Proyectos proy);
     public void borrarProyectos (Long id);
     public Proyectos buscarProyectos(Long id);
-    public boolean existsById(Long id);
-    public Optional<Proyectos> getOne(Long id);
+    public boolean existencia(Long id);
+    public Optional<Proyectos> uno(Long id);
 }

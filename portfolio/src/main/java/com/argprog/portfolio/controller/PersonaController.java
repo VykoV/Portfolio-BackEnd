@@ -10,10 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 /*import org.springframework.security.access.prepost.PreAuthorize;*/
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
+//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +29,7 @@ public class PersonaController {
     private IPersonaService persoServ;
     
     /*
-    @PostMapping("/new")
+    @PostMapping("/nuevo")
     @PreAuthorize("hasRole('ADMIN')")
     public void agregarPersona (@RequestBody Persona pers){
         persoServ.crearPersona(pers);
@@ -43,31 +43,27 @@ public class PersonaController {
     }
     
     
-    /*@DeleteMapping ("/delete/{id}")
+    /*@DeleteMapping ("/eliminar/{id}")
     public void borrarPersona(@PathVariable Long id){
         persoServ.borrarPersona(id);
     }*/
     
     
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Persona perso){
-        if(!persoServ.existsById(id))
-            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        Persona Per = persoServ.getOne(id).get();
+    @PutMapping("/actualizar/{id}")
+    public void actualizar(@PathVariable("id") Long id, @RequestBody Persona perso){
+        Persona Per = persoServ.uno(id).get();
         Per.setNombrePerfil(perso.getNombrePerfil());
         Per.setImgBanner(perso.getImgBanner());
         Per.setImgPerfil(perso.getImgPerfil());
         Per.setTitulo(perso.getTitulo());
 
         persoServ.crearPersona(Per);
-        return new ResponseEntity(new Mensaje("Persona actualizada"), HttpStatus.OK);
     }
     
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<Persona> getById(@PathVariable("id") Long id){
-        if(!persoServ.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Persona experiencia = persoServ.getOne(id).get();
-        return new ResponseEntity(experiencia, HttpStatus.OK);
+    @GetMapping("/pers/{id}")
+    public Persona obtener(@PathVariable("id") Long id){
+       
+        Persona experiencia = persoServ.uno(id).get();
+        return experiencia;
     }
 }

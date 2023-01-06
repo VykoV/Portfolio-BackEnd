@@ -38,12 +38,12 @@ public class EducacionService implements IEducacionService {
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existencia(Long id) {
         return educacionRepository.existsById(id);
     }
 
     @Override
-    public Optional<Educacion> getOne(Long id) {
+    public Optional<Educacion> uno(Long id) {
         return educacionRepository.findById(id);
     }
     

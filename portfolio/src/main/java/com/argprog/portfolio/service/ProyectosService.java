@@ -38,13 +38,13 @@ public class ProyectosService implements IProyectosService{
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existencia(Long id) {
         return proyectosRepository.existsById(id);
 
     }
 
     @Override
-    public Optional<Proyectos> getOne(Long id) {
+    public Optional<Proyectos> uno(Long id) {
         return proyectosRepository.findById(id);
     }
     

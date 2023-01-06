@@ -3,11 +3,13 @@ package com.argprog.portfolio.Security.entity;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
+@Getter @Setter
 public class UsuarioPrincipal implements UserDetails {
     private String nombre;
     private String nombreUsuario;
@@ -38,8 +40,7 @@ public class UsuarioPrincipal implements UserDetails {
     public String getPassword() {
         return password;
     }
-    
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -72,7 +73,5 @@ public class UsuarioPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-    
-    
+    }    
 }

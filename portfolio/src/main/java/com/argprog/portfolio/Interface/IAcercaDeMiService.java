@@ -9,6 +9,6 @@ public interface IAcercaDeMiService {
     public void crearAcercaDeMi (AcercaDeMi adm);
     public void borrarAcercaDeMi (Long id);
     public AcercaDeMi buscarAcercaDeMi(Long id);
-    public boolean existsById(Long id);
-    public Optional<AcercaDeMi> getOne(Long id);
+    public boolean existencia(Long id);
+    public Optional<AcercaDeMi> uno(Long id);
 }

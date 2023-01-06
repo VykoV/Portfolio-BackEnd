@@ -35,13 +35,13 @@ public class HardSkillFrontEndService implements IHardSkillFrontEndService{
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existencia(Long id) {
         return hardSkillFrontEndRepository.existsById(id);
 
     }
 
     @Override
-    public Optional<HardSkillFrontEnd> getOne(Long id) {
+    public Optional<HardSkillFrontEnd> uno(Long id) {
         return hardSkillFrontEndRepository.findById(id);
 
     }
