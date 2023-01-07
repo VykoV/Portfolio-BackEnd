@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+@CrossOrigin(origins="https://portfoliovvalli.web.app")
 public class AuthController {
 
     @Autowired
@@ -46,6 +46,7 @@ public class AuthController {
     JwtProvider jwtProvider;
 
    @PostMapping("/nuevo")
+   
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) 
             return new ResponseEntity(new Mensaje("Campos mal ingesado o email invalido"), HttpStatus.BAD_REQUEST);
