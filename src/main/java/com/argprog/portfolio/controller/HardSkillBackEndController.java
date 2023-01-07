@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("hardskillbackend")
-@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="https://portfoliovvalli.web.app")
 public class HardSkillBackEndController {
     @Autowired
     private IHardSkillBackEndService iHardSkillBackEndService;
